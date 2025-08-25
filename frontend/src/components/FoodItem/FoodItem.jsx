@@ -12,7 +12,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
       <div className="food-item-image-container">
         <img
           className="food-item-image"
-          src={"/images/" + image}
+          src={url + "/images/" + image}
           alt=""
           onError={(e) => {
             console.error("Image failed to load:", url + "/images/" + image);

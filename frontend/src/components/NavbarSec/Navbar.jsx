@@ -9,10 +9,11 @@ const navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const { getTotalCartAmount, token, setToken, searchFood } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, searchFood } =
+    useContext(StoreContext);
   const navigate = useNavigate();
   const mobileMenuRef = useRef();
-  
+
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
@@ -22,17 +23,20 @@ const navbar = ({ setShowLogin }) => {
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
         setShowMobileMenu(false);
       }
     };
 
     if (showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showMobileMenu]);
   return (
@@ -81,30 +85,33 @@ const navbar = ({ setShowLogin }) => {
               onChange={(e) => searchFood(e.target.value)}
             />
           )}
-          <img 
-            src={assets.search_icon} 
-            alt="search" 
+          <img
+            src={assets.search_icon}
+            alt="search"
             onClick={() => setShowSearch(!showSearch)}
             className="search-icon"
           />
         </div>
-        
+
         <div className="navbar-search-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="cart" />
           </Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
-        
+
         {/* Mobile Menu Toggle */}
-        <div className="mobile-menu-toggle" onClick={() => setShowMobileMenu(!showMobileMenu)}>
-          <div className={`hamburger ${showMobileMenu ? 'active' : ''}`}>
+        <div
+          className="mobile-menu-toggle"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          <div className={`hamburger ${showMobileMenu ? "active" : ""}`}>
             <span></span>
             <span></span>
             <span></span>
           </div>
         </div>
-        
+
         {/* Desktop Auth Section */}
         <div className="desktop-auth">
           {!token ? (
@@ -130,9 +137,12 @@ const navbar = ({ setShowLogin }) => {
           )}
         </div>
       </div>
-      
+
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${showMobileMenu ? 'show' : ''}`} ref={mobileMenuRef}>
+      <div
+        className={`mobile-menu ${showMobileMenu ? "show" : ""}`}
+        ref={mobileMenuRef}
+      >
         <ul className="mobile-menu-items">
           <Link
             to="/"
@@ -175,29 +185,35 @@ const navbar = ({ setShowLogin }) => {
             Contact us
           </a>
         </ul>
-        
+
         {/* Mobile Auth Section */}
         <div className="mobile-auth">
           {!token ? (
-            <button onClick={() => {
-              setShowLogin(true);
-              setShowMobileMenu(false);
-            }}>
+            <button
+              onClick={() => {
+                setShowLogin(true);
+                setShowMobileMenu(false);
+              }}
+            >
               Sign in
             </button>
           ) : (
             <div className="mobile-profile-options">
-              <button onClick={() => {
-                navigate("/myorders");
-                setShowMobileMenu(false);
-              }}>
+              <button
+                onClick={() => {
+                  navigate("/myorders");
+                  setShowMobileMenu(false);
+                }}
+              >
                 <img src={assets.bag_icon} alt="" />
                 My Orders
               </button>
-              <button onClick={() => {
-                logout();
-                setShowMobileMenu(false);
-              }}>
+              <button
+                onClick={() => {
+                  logout();
+                  setShowMobileMenu(false);
+                }}
+              >
                 <img src={assets.logout_icon} alt="" />
                 Logout
               </button>

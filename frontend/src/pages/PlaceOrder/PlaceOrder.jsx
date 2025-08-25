@@ -45,7 +45,7 @@ const PlaceOrder = () => {
     console.log("Cart items:", cartItems);
 
     try {
-      let response = await axios.post("/api/order/place", orderData, {
+      let response = await axios.post(url + "/api/order/place", orderData, {
         headers: { token },
       });
 
