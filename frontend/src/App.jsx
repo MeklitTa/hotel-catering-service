@@ -12,20 +12,20 @@ import MyOrders from "./pages/Myorders/MyOrders.jsx";
 // Logout component that handles clearing localStorage and redirecting
 const LogoutHandler = () => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // Clear all localStorage data
     localStorage.clear();
     // Redirect to home page
     navigate("/", { replace: true });
   }, [navigate]);
-  
+
   return null; // This component doesn't render anything
 };
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
-  
+
   return (
     <>
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
